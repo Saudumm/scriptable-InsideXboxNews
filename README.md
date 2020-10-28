@@ -4,6 +4,7 @@ Scriptable Widget for InsideXbox.de
 
 1. Skript zu Scriptable hinzufügen
 2. Widget auf Homescreen erstellen und Script auswählen
+3. Wer möchte, kann die Hintergrundfarbe (oder sogar einen Farbverlauf) direkt im Code anpassen. Der entprechende Teil wurde im Code kommentiert/beschrieben.
 
 Das Widget kann für die verschiedenen Größen angepasst werden. Dazu lange auf das Widget drücken und "Widget bearbeiten" auswählen.
 
