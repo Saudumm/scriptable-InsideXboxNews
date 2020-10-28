@@ -1,5 +1,10 @@
 # scriptable-InsideXboxNews
 Scriptable Widget for InsideXbox.de
+
+## Voraussetzung:
+
+Scriptable für iOS: [Link](https://apps.apple.com/de/app/scriptable/id1405459188)
+
 ## Konfiguration:
 
 1. Skript zu Scriptable hinzufügen
