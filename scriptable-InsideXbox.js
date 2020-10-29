@@ -15,9 +15,9 @@ var BACKGROUND_GRADIENT = false // Widget Hintergrund; true = Farbverlauf, false
 var BACKGROUND_COLOR = new Color("#1c1c1e") // Wird verwendet wenn BACKGROUND_GRADIENT = false
 var BACKGROUND_GRADIENT_COLOR_TOP = new Color("#48484a") // Farbverlauf Farbe oben
 var BACKGROUND_GRADIENT_COLOR_BTM = new Color("#2c2c2e") // Farbverlauf Farbe unten
-const FONT_COLOR_SITENAME = Color.white()
-const FONT_COLOR_HEADLINE = Color.white()
-const FONT_COLOR_POST_DATE = Color.lightGray()
+const FONT_COLOR_SITENAME = Color.white() // Schriftfarbe Seitenname
+const FONT_COLOR_HEADLINE = Color.white() // Schriftfarbe Schlagzeile
+const FONT_COLOR_POST_DATE = Color.lightGray() // Schriftfarbe Datum/Uhrzeit
 
 // DO NOT CHANGE
 // JSON URL für Posts (Wordpress Standard)
