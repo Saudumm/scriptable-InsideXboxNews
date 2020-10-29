@@ -15,6 +15,9 @@ var BACKGROUND_GRADIENT = false // Widget Hintergrund; true = Farbverlauf, false
 var BACKGROUND_COLOR = new Color("#1c1c1e") // Wird verwendet wenn BACKGROUND_GRADIENT = false
 var BACKGROUND_GRADIENT_COLOR_TOP = new Color("#48484a") // Farbverlauf Farbe oben
 var BACKGROUND_GRADIENT_COLOR_BTM = new Color("#2c2c2e") // Farbverlauf Farbe unten
+const FONT_COLOR_SITENAME = Color.white()
+const FONT_COLOR_HEADLINE = Color.white()
+const FONT_COLOR_POST_DATE = Color.lightGray()
 
 // DO NOT CHANGE
 // JSON URL für Posts (Wordpress Standard)
@@ -57,13 +60,14 @@ Script.setWidget(widget)
 Script.complete()
 
 async function createWidget(items) {
-    const data = await getData()
-    const list = new ListWidget()
+    const data = await getData();
+    const list = new ListWidget();
 
     const siteName = list.addText(SITE_NAME.toUpperCase());
-    siteName.font = Font.heavyMonospacedSystemFont(13)
+    siteName.font = Font.heavyMonospacedSystemFont(13);
+    siteName.textColor = FONT_COLOR_SITENAME;
 
-    list.addSpacer()
+    list.addSpacer();
     
     if (data) {
         if (NUMBER_OF_POSTS == 1) {
@@ -71,26 +75,27 @@ async function createWidget(items) {
             list.backgroundImage = await getImage(data.post1BG);
 
             // Gradient über Hintergrundbild, damit Text lesbar wird
-            BACKGROUND_GRADIENT = true
-            BACKGROUND_GRADIENT_COLOR_TOP = new Color('1c1c1e', 0.4)
-            BACKGROUND_GRADIENT_COLOR_BTM = new Color('1c1c1e', 0.9)
+            BACKGROUND_GRADIENT = true;
+            BACKGROUND_GRADIENT_COLOR_TOP = new Color('#000000', 0.4);
+            BACKGROUND_GRADIENT_COLOR_BTM = new Color('#000000', 1);
    
             // Für bessere Lesbarkeit ein kleiner Schatten um den Seitennamen
-            siteName.shadowRadius = 1
-            siteName.shadowColor = Color.black()
+            siteName.shadowRadius = 1;
+            siteName.shadowColor = Color.black();
             
-            const postStack = list.addStack()
-            postStack.layoutVertically()
+            const postStack = list.addStack();
+            postStack.layoutVertically();
 
             const labelPost1DateTime = postStack.addText(convertDateString(data.post1DateTime));
-            labelPost1DateTime.font = Font.heavyMonospacedSystemFont(12)
-            labelPost1DateTime.textColor = Color.lightGray()
+            labelPost1DateTime.font = Font.heavyMonospacedSystemFont(12);
+            labelPost1DateTime.textColor = FONT_COLOR_POST_DATE;
             
-            const labelPost1Headline = postStack.addText(data.post1Title)
-            labelPost1Headline.font = Font.heavyMonospacedSystemFont(12)
+            const labelPost1Headline = postStack.addText(data.post1Title);
+            labelPost1Headline.font = Font.heavyMonospacedSystemFont(12);
+            labelPost1Headline.textColor = FONT_COLOR_HEADLINE;
             labelPost1Headline.lineLimit = 3;
             
-            list.url = data.post1URL
+            list.url = data.post1URL;
             
         } else if (NUMBER_OF_POSTS >= 2) {
             // Reihe für Post 1
@@ -103,10 +108,11 @@ async function createWidget(items) {
 
             const labelPost1DateTime = stackColumn1.addText(convertDateString(data.post1DateTime));
             labelPost1DateTime.font = Font.heavyMonospacedSystemFont(12)
-            labelPost1DateTime.textColor = Color.gray()
+            labelPost1DateTime.textColor = FONT_COLOR_POST_DATE
 
             const labelPost1Headline = stackColumn1.addText(data.post1Title)
             labelPost1Headline.font = Font.heavyMonospacedSystemFont(12)
+            labelPost1Headline.textColor = FONT_COLOR_HEADLINE;
             labelPost1Headline.lineLimit = 2;
         
             stackRow1.addSpacer()
@@ -128,10 +134,11 @@ async function createWidget(items) {
 
             const labelPost2DateTime = stackColumn2.addText(convertDateString(data.post2DateTime));
             labelPost2DateTime.font = Font.heavyMonospacedSystemFont(12)
-            labelPost2DateTime.textColor = Color.gray()
+            labelPost2DateTime.textColor = FONT_COLOR_POST_DATE
 
             const labelPost2Headline = stackColumn2.addText(data.post2Title)
             labelPost2Headline.font = Font.heavyMonospacedSystemFont(12)
+            labelPost2Headline.textColor = FONT_COLOR_HEADLINE;
             labelPost2Headline.lineLimit = 2;
 
             stackRow2.addSpacer()
@@ -154,10 +161,11 @@ async function createWidget(items) {
 
                 const labelPost3DateTime = stackColumn3.addText(convertDateString(data.post3DateTime));
                 labelPost3DateTime.font = Font.heavyMonospacedSystemFont(12)
-                labelPost3DateTime.textColor = Color.gray()
+                labelPost3DateTime.textColor = FONT_COLOR_POST_DATE;
 
                 const labelPost3Headline = stackColumn3.addText(data.post3Title);
                 labelPost3Headline.font = Font.heavyMonospacedSystemFont(12);
+                labelPost3Headline.textColor = FONT_COLOR_HEADLINE;
                 labelPost3Headline.lineLimit = 2;
 
                 stackRow3.addSpacer()
@@ -179,10 +187,11 @@ async function createWidget(items) {
 
                 const labelPost4DateTime = stackColumn4.addText(convertDateString(data.post4DateTime));
                 labelPost4DateTime.font = Font.heavyMonospacedSystemFont(12)
-                labelPost4DateTime.textColor = Color.gray()
+                labelPost4DateTime.textColor = FONT_COLOR_POST_DATE;
 
                 const labelPost4Headline = stackColumn4.addText(data.post4Title)
                 labelPost4Headline.font = Font.heavyMonospacedSystemFont(12)
+                labelPost4Headline.textColor = FONT_COLOR_HEADLINE;
                 labelPost4Headline.lineLimit = 2
 
                 stackRow4.addSpacer()
@@ -204,10 +213,11 @@ async function createWidget(items) {
 
                 const labelPost5DateTime = stackColumn5.addText(convertDateString(data.post5DateTime));
                 labelPost5DateTime.font = Font.heavyMonospacedSystemFont(12)
-                labelPost5DateTime.textColor = Color.gray()
+                labelPost5DateTime.textColor = FONT_COLOR_POST_DATE;
 
                 const labelPost5Headline = stackColumn5.addText(data.post5Title)
                 labelPost5Headline.font = Font.heavyMonospacedSystemFont(12)
+                labelPost5Headline.textColor = FONT_COLOR_HEADLINE;
                 labelPost5Headline.lineLimit = 2
 
                 stackRow5.addSpacer()
