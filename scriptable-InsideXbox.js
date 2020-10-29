@@ -4,14 +4,16 @@
 // coded by Saudumm
 
 // WIDGET CONFIG
-// Grundkonfiguration, lässt sich durch Widget Parameter überschreiben
-var WIDGET_SIZE = 'small' // small, medium, large
+var WIDGET_SIZE = 'small' // small, medium, large // lässt sich durch Widget Parameter überschreiben
+const SITE_URL = 'https://www.insidexbox.de'
+const SITE_NAME = 'InsideXbox.de'
+const POST_IMAGES = true // auf false setzen, wenn Bilder-URL unklar oder Bilder unerwünscht sind
 
 // COLOR CONFIG FÜR MEDIUM  UND LARGE WIDGET
-const BACKGROUND_GRADIENT = false // Widget Hintergrund; true = Farbverlauf, false = einfarbig
-const BACKGROUND_COLOR = "#1c1c1e" // Wird verwendet wenn BACKGROUND_GRADIENT = false
-const BACKGROUND_GRADIENT_COLOR_TOP = "#48484a" // Farbverlauf Farbe oben
-const BACKGROUND_GRADIENT_COLOR_BTM = "#2c2c2e" // Farbverlauf Farbe unten
+var BACKGROUND_GRADIENT = false // Widget Hintergrund; true = Farbverlauf, false = einfarbig
+var BACKGROUND_COLOR = new Color("#1c1c1e") // Wird verwendet wenn BACKGROUND_GRADIENT = false
+var BACKGROUND_GRADIENT_COLOR_TOP = new Color("#48484a") // Farbverlauf Farbe oben
+var BACKGROUND_GRADIENT_COLOR_BTM = new Color("#2c2c2e") // Farbverlauf Farbe unten
 
 // DO NOT CHANGE
 // JSON URL für Posts (Wordpress Standard)
@@ -32,7 +34,7 @@ switch (WIDGET_SIZE) {
         NUMBER_OF_POSTS = 5;
         break
 }
-const JSON_API_URL = "https://www.insidexbox.de/wp-json/wp/v2/posts/?filter[category_name]=country&per_page="+NUMBER_OF_POSTS
+const JSON_API_URL = SITE_URL+"/wp-json/wp/v2/posts/?filter[category_name]=country&per_page="+NUMBER_OF_POSTS
 
 let widget = await createWidget()
 
@@ -57,7 +59,7 @@ async function createWidget(items) {
     const data = await getData()
     const list = new ListWidget()
 
-    const siteName = list.addText('InsideXbox.de'.toUpperCase());
+    const siteName = list.addText(SITE_NAME.toUpperCase());
     siteName.font = Font.heavyMonospacedSystemFont(13)
 
     list.addSpacer()
@@ -68,13 +70,9 @@ async function createWidget(items) {
             list.backgroundImage = await getImage(data.post1BG);
 
             // Gradient über Hintergrundbild, damit Text lesbar wird
-            const gradient = new LinearGradient()
-            gradient.locations = [0, 1]
-            gradient.colors = [
-                new Color('1c1c1e', 0.4),
-                new Color('1c1c1e', 0.9)
-            ]
-            list.backgroundGradient = gradient
+            BACKGROUND_GRADIENT = true
+            BACKGROUND_GRADIENT_COLOR_TOP = new Color('1c1c1e', 0.4)
+            BACKGROUND_GRADIENT_COLOR_BTM = new Color('1c1c1e', 0.9)
    
             // Für bessere Lesbarkeit ein kleiner Schatten um den Seitennamen
             siteName.shadowRadius = 1
@@ -229,12 +227,12 @@ async function createWidget(items) {
         const gradient = new LinearGradient()
         gradient.locations = [0, 1]
         gradient.colors = [
-            new Color(BACKGROUND_GRADIENT_COLOR_TOP),
-            new Color(BACKGROUND_GRADIENT_COLOR_BTM)
+            BACKGROUND_GRADIENT_COLOR_TOP,
+            BACKGROUND_GRADIENT_COLOR_BTM
         ]
         list.backgroundGradient = gradient
     } else {
-        list.backgroundColor = new Color(BACKGROUND_COLOR)
+        list.backgroundColor = BACKGROUND_COLOR
     }
     
     return list
@@ -252,7 +250,7 @@ async function getData() {
         
         if (NUMBER_OF_POSTS >= 1) {
             post1Title = loadedJSON[0].title.rendered;
-            post1Title = post1Title.replace("&#8211;", "-");
+            post1Title = formatHeadline(post1Title);
             post1ThumbnailURL = loadedJSON[0].featured_url;
             post1ThumbnailURL = post1ThumbnailURL.replace('.jpg', '-218x150.jpg');
             post1BG = loadedJSON[0].featured_url;
@@ -261,7 +259,7 @@ async function getData() {
             
             if (NUMBER_OF_POSTS >= 2) {
                 post2Title = loadedJSON[1].title.rendered;
-                post2Title = post2Title.replace("&#8211;", "-");
+                post2Title = formatHeadline(post2Title);
                 post2DateTime = loadedJSON[1].date;
                 post2ThumbnailURL = loadedJSON[1].featured_url;
                 post2ThumbnailURL = post2ThumbnailURL.replace('.jpg', '-218x150.jpg');
@@ -269,21 +267,21 @@ async function getData() {
                 
                 if (NUMBER_OF_POSTS == 5) {
                     post3Title = loadedJSON[2].title.rendered;
-                    post3Title = post3Title.replace("&#8211;", "-");
+                    post3Title = formatHeadline(post3Title);
                     post3DateTime = loadedJSON[2].date;
                     post3ThumbnailURL = loadedJSON[2].featured_url;
                     post3ThumbnailURL = post3ThumbnailURL.replace('.jpg', '-218x150.jpg');
                     post3URL = loadedJSON[2].guid.rendered;
                     
                     post4Title = loadedJSON[3].title.rendered;
-                    post4Title = post4Title.replace("&#8211;", "-");
+                    post4Title = formatHeadline(post4Title);
                     post4DateTime = loadedJSON[3].date;
                     post4ThumbnailURL = loadedJSON[3].featured_url;
                     post4ThumbnailURL = post4ThumbnailURL.replace('.jpg', '-218x150.jpg');
                     post4URL = loadedJSON[3].guid.rendered;
                     
                     post5Title = loadedJSON[4].title.rendered;
-                    post5Title = post5Title.replace("&#8211;", "-");
+                    post5Title = formatHeadline(post5Title);
                     post5DateTime = loadedJSON[4].date;
                     post5ThumbnailURL = loadedJSON[4].featured_url;
                     post5ThumbnailURL = post5ThumbnailURL.replace('.jpg', '-218x150.jpg');
@@ -320,6 +318,40 @@ async function getData() {
     } catch (e) {
         return null;
     }
+}
+
+function formatHeadline(strHeadline) {
+    strHeadline = strHeadline.replace("&quot;", '"');
+    strHeadline = strHeadline.replace("&amp;", "&");
+    strHeadline = strHeadline.replace("&lt;", "<");
+    strHeadline = strHeadline.replace("&gt;", ">");
+    strHeadline = strHeadline.replace("&#34;", '"');
+    strHeadline = strHeadline.replace("&#38;", "&");
+    strHeadline = strHeadline.replace("&#60;", "<");
+    strHeadline = strHeadline.replace("&#62;", ">");
+    strHeadline = strHeadline.replace("&#338;", "Œ");
+    strHeadline = strHeadline.replace("&#339;", "œ");
+    strHeadline = strHeadline.replace("&#352;", "Š");
+    strHeadline = strHeadline.replace("&#353;", "š");
+    strHeadline = strHeadline.replace("&#376;", "Ÿ");
+    strHeadline = strHeadline.replace("&#710;", "ˆ");
+    strHeadline = strHeadline.replace("&#732;", "˜");
+    strHeadline = strHeadline.replace("&#8211;", "–");
+    strHeadline = strHeadline.replace("&#8212;", "—");
+    strHeadline = strHeadline.replace("&#8216;", "‘");
+    strHeadline = strHeadline.replace("&#8217;", "’");
+    strHeadline = strHeadline.replace("&#8218;", "‚");
+    strHeadline = strHeadline.replace("&#8220;", "“");
+    strHeadline = strHeadline.replace("&#8221;", "”");
+    strHeadline = strHeadline.replace("&#8222;", "„");
+    strHeadline = strHeadline.replace("&#8224;", "†");
+    strHeadline = strHeadline.replace("&#8225;", "‡");
+    strHeadline = strHeadline.replace("&#8240;", "‰");
+    strHeadline = strHeadline.replace("&#8249;", "‹");
+    strHeadline = strHeadline.replace("&#8250;", "›");
+    strHeadline = strHeadline.replace("&#8364;", "€");
+
+    return strHeadline;
 }
 
 function convertDateString(strDate) {
