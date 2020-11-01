@@ -14,6 +14,7 @@ Scriptable für iOS: [Link](https://apps.apple.com/de/app/scriptable/id140545918
 - v1.4 - Eigene Hintergrundbilder für alle Widget Größen
 - v1.5 - Code gewaltig aufgeräut, neue Beschreibungen für die Anpassung des Widgets
 - v1.5.1 - Fix für die Anzeige des Datums
+- v1.5.2 - Twitter Link hinzugefügt
 
 ## Konfiguration:
 
