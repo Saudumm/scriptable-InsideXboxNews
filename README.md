@@ -1,35 +1,45 @@
 # scriptable-InsideXboxNews
-Scriptable Widget for InsideXbox.de
+Scriptable Widget für InsideXbox.de
 
 ## Voraussetzung:
 
 Scriptable für iOS: [Link](https://apps.apple.com/de/app/scriptable/id1405459188)
 
+# Changelog
+
+- v1.0 - Erster Upload
+- v1.1 - Fix für Anzeige von Datum und Uhrzeit je nach Systemsprache
+- v1.2 - Widget kann jetzt mit Parametern angepasst werden, sogar mit Hintergrundbildern! (Siehe Code Kommentare für weitere Infos)
+- v1.3 - Bugfix für URLs mit Sonderzeichen
+- v1.4 - Eigene Hintergrundbilder für alle Widget Größen
+- v1.5 - Code gewaltig aufgeräut, neue Beschreibungen für die Anpassung des Widgets
+- v1.5.1 - Fix für die Anzeige des Datums
+
 ## Konfiguration:
 
 1. Skript zu Scriptable hinzufügen
 2. Widget auf Homescreen erstellen und Script auswählen
-3. Wer möchte, kann die Hintergrundfarbe (oder sogar einen Farbverlauf) direkt im Code anpassen. Der entprechende Teil wurde im Code kommentiert/beschrieben.
+3. Wer möchte, kann die Hintergrundfarbe (oder sogar einen Farbverlauf) direkt im Code anpassen. Der entprechende Teil wurde im Code kommentiert/beschrieben. Hintergrundbilder sind auch möglich.
 
-Das Widget kann für die verschiedenen Größen angepasst werden. Dazu lange auf das Widget drücken und "Widget bearbeiten" auswählen.
+Man kann auch das Layout und den Hintergrund des Widgets anpassen. Einfach lange auf das Widget drücken und "Widget bearbeiten" auswählen.
 
-![](https://github.com/Saudumm/scriptable-InsideXboxNews/blob/main/widget-config.jpeg)
+![widget-config](https://github.com/Saudumm/scriptable-InsideXboxNews/blob/main/widgetConfig.jpeg)
 
-Bei "Parameter" einen der folgenden Werte eingeben:
-- **small** (Standardwert) für kleine Widgets oder mittlere Widgets
-  - zeigt nur die aktuellste News inkl. Hintergrundbild an
-- **medium** für mittlere Widgets
-  - zeigt die beiden aktuellsten News an
-- **large** für große Widgets
-  - zeigt die fünf aktuellsten News an
+### Widget parameters
+ - Beispiel: small|https://www.insidexbox.de|InsideXbox.de|xsx-console-blur.jpg
+- Parameter Reihenfolge: widget size, site url, site name, background image
+- Parameter müssen durch | getrennt sein
+- Man kann auch Parameter weglassen, zum Beispiel das Hintergrundbild: small|https://www.insidexbox.de|InsideXbox.de
+- Man kann auch nur "small", "medium" oder "large" als Parameter setzen
+- Nicht gesetzte Parameter werden im Code durch die Standard Config genutzt
 
 ## Beispiele:
-![](https://github.com/Saudumm/scriptable-InsideXboxNews/blob/main/widget-examples.jpeg)
 
-Links oben: Mittleres Widget mit Standardkonfiguration "small"
+![widget-examples](https://github.com/Saudumm/scriptable-InsideXboxNews/blob/main/widgetExamples.jpeg)
 
-Links unten: Kleines Widget mit Standardkonfiguration "small"
-
-Rechts oben: Mittleres Widget mit Konfiguration "medium"
-
-Rechts unten: Großes Widget mit Konfiguration "large"
+- Oben Links: Kleines Widget mit Standard Parameter
+- Oben Mitte:  Kleines Widget mit Standard Parameter und Hintergrundbild
+- Oben Rechts: Mittleres Widget mit Parameter "medium"
+- Mitte Links: Mittleres Widget mit Standard Parameter "small"
+- Unten Links: Mittleres Widget mit Parameter "medium" und Hintergrundbild
+- Unten Rechts: Großes Widget mit Parameter "large" und Hintergrundbild
