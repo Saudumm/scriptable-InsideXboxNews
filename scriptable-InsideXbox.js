@@ -1,7 +1,7 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: deep-green; icon-glyph: gamepad;
-// v1.6.0 coded by Saudumm (https://twitter.com/saudumm)
+// v1.6.1 coded by Saudumm (https://twitter.com/saudumm)
 // GitHub: https://github.com/Saudumm/scriptable-InsideXboxNews
 
 /*  WIDGET PARAMETERS: you can long press on the widget on your homescreen and edit parameters
@@ -337,7 +337,7 @@ function formatPostTitle(strHeadline) {
 // result: a nicely formatted date and time
 function convertJSONDateString(strDate) {
   let date_conv = new Date(strDate);
-  let dateTimeLocal = date_conv.toLocaleString(["en-US"], {year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit"})
+  let dateTimeLocal = date_conv.toLocaleString([], {year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit"})
   return dateTimeLocal
 }
 
