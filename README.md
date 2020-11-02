@@ -1,6 +1,8 @@
 # scriptable-InsideXboxNews
 Scriptable Widget für InsideXbox.de
 
+Das Skript sollte auch für die meisten anderen WordPress Seiten funktionieren.
+
 ## Voraussetzung:
 
 Scriptable für iOS: [Link](https://apps.apple.com/de/app/scriptable/id1405459188)
@@ -15,13 +17,14 @@ Scriptable für iOS: [Link](https://apps.apple.com/de/app/scriptable/id140545918
 - v1.5 - Code gewaltig aufgeräut, neue Beschreibungen für die Anpassung des Widgets
 - v1.5.1 - Fix für die Anzeige des Datums
 - v1.5.2 - Twitter Link hinzugefügt
+- v1.6.0 - Unschärfeeffekt für Hintergrundbilder (oder Artikelbilder bei kleinen Widgets)
+- v1.6.1 - Korrekte Anzeige für Datum/Uhrzeit
 
 ---
 
 _Falls mir jemand einen Kaffee ausgeben möchte 😊: https://ko-fi.com/saudumm_
 
 ---
-
 
 ## Konfiguration:
 
